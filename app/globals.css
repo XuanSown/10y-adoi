@@ -18,6 +18,10 @@ html, body {
 }
 
 body {
-  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  background-image: url("/images/branding/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--color-on-surface);
 }
