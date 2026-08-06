@@ -107,10 +107,10 @@ export default function RankPage() {
         <p className="fx-subtitle text-white/70 text-sm mt-1">Bảng xếp hạng</p>
       </header>
 
-      <div className="flex-1 p-4 pt-6">
-        <div className="max-w-2xl mx-auto">
+      <div className="flex-1 flex items-center justify-center p-4 sm:p-6">
+        <div className="w-full max-w-2xl">
           {/* Chart area */}
-          <div className="space-y-4">
+          <div className="space-y-5 sm:space-y-6">
             {sorted.map((c, idx) => {
               const pct = (c.vote_count / XAXIS_MAX) * 100;
               return (
