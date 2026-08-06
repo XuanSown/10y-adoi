@@ -103,12 +103,19 @@ body {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 0;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.18) 0%,
     transparent 50%
   );
   pointer-events: none;
+}
+
+/* Ensure header content sits above pseudo-elements */
+.liquid-glass-header > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Subtle edge refraction glow */
@@ -150,6 +157,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 0;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.15) 0%,
@@ -157,4 +165,10 @@ body {
   );
   pointer-events: none;
   border-radius: inherit;
+}
+
+/* Ensure card content sits above pseudo-elements */
+.liquid-glass-card > * {
+  position: relative;
+  z-index: 1;
 }
