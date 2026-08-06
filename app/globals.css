@@ -57,9 +57,12 @@ body {
 
 /* Focus-Drift — letters slip in and out of focus, one after another */
 .fx-focus {
-  font: 700 30px/1.1 "SVN-Gilroy", sans-serif;
+  font: 700 clamp(20px, 4vw, 30px)/1.1 "SVN-Gilroy", sans-serif;
   letter-spacing: .08em;
   color: #fad68e;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .fx-focus b {
   font-weight: inherit;

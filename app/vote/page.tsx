@@ -155,7 +155,7 @@ function VoteInner() {
       <ConnectionBanner connected={connected} />
 
       <header className="liquid-glass-header text-white py-3 px-4 text-center">
-        <div className="fx-focus" role="img" aria-label={event?.name ?? "Sự kiện"}>
+        <div className="fx-focus truncate" role="img" aria-label={event?.name ?? "Sự kiện"}>
           {(event?.name ?? "Sự kiện").split("").map((ch, i) => (
             <b key={i} aria-hidden="true" style={{ "--i": i } as React.CSSProperties}>{ch}</b>
           ))}
@@ -182,7 +182,7 @@ function VoteInner() {
         )}
 
         {/* Layout 2-2-1 */}
-        <div className="grid grid-cols-2 gap-3 mb-3">
+        <div className="grid grid-cols-2 gap-4 md:gap-6 mb-4">
           {candidates.slice(0, 4).map((c) => (
             <CandidateCard
               key={c.id}
