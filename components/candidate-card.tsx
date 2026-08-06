@@ -30,9 +30,9 @@ export function CandidateCard({
       onClick={() => onSelect?.(id)}
       className={`relative flex flex-col rounded-xl overflow-hidden shadow-lg transition-all duration-200 ${
         disabled ? "cursor-not-allowed opacity-70" : "cursor-pointer hover:scale-[1.02] hover:shadow-xl active:scale-[0.98]"
-      } ${selected ? "ring-4 ring-accent" : "ring-1 ring-gray-200"}`}
+      } ${selected ? "ring-4 ring-accent" : "ring-1 ring-white/20"}`}
     >
-      <div className="relative aspect-video w-full overflow-hidden bg-gray-100">
+      <div className="relative aspect-video w-full overflow-hidden bg-black">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={imagePath}
@@ -44,9 +44,9 @@ export function CandidateCard({
           {displayOrder}
         </div>
       </div>
-      <div className="p-2 bg-white text-center">
-        <p className="font-semibold text-sm text-on-surface truncate">{name}</p>
-        <p className="text-xs text-on-surface-muted mt-0.5">{voteCount} vote</p>
+      <div className="p-2 bg-white/10 backdrop-blur-sm text-center">
+        <p className="font-semibold text-sm text-white truncate">{name}</p>
+        <p className="text-xs text-white/60 mt-0.5">{voteCount} vote</p>
         {hasVoted && selected && (
           <span className="inline-block mt-1 text-xs bg-success/10 text-success px-2 py-0.5 rounded-full font-medium">
             ✓ Đã chọn

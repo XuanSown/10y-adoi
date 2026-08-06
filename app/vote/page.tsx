@@ -45,6 +45,7 @@ function VoteInner() {
   const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
   const [votingLoading, setVotingLoading] = useState(false);
   const [votedCandidateId, setVotedCandidateId] = useState<string | null>(null);
+  const [nameVisible, setNameVisible] = useState(true);
 
   const fetchSnapshot = useCallback(async () => {
     try {
@@ -161,7 +162,26 @@ function VoteInner() {
           ))}
         </div>
         {voter && !isDisplay && (
-          <p className="text-sm opacity-80">Xin chào, {voter.display_name}</p>
+          <p className="text-sm opacity-80 inline-flex items-center gap-1.5">
+            Xin chào, {nameVisible ? voter.display_name : "• • • •"}
+            <button
+              onClick={() => setNameVisible((v) => !v)}
+              className="inline-flex items-center justify-center w-5 h-5 rounded hover:bg-white/20 transition-colors"
+              aria-label={nameVisible ? "Ẩn tên" : "Hiện tên"}
+            >
+              {nameVisible ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              )}
+            </button>
+          </p>
         )}
         {votingClosed && !isDisplay && (
           <p className="text-xs mt-1 text-amber-300">Đã khóa bình chọn</p>
@@ -181,9 +201,9 @@ function VoteInner() {
           </div>
         )}
 
-        {/* Layout 2-2-1 */}
+        {/* Layout grid — all cards equal size */}
         <div className="grid grid-cols-2 gap-4 md:gap-6 mb-4">
-          {candidates.slice(0, 4).map((c) => (
+          {candidates.map((c) => (
             <CandidateCard
               key={c.id}
               id={c.id}
@@ -198,22 +218,6 @@ function VoteInner() {
             />
           ))}
         </div>
-
-        {candidates[4] && (
-          <div className="max-w-[50%] mx-auto">
-            <CandidateCard
-              id={candidates[4].id}
-              name={candidates[4].name}
-              imagePath={candidates[4].image_path}
-              voteCount={candidates[4].vote_count}
-              displayOrder={candidates[4].display_order}
-              disabled={isDisplay || !!voter?.has_voted || !votingOpen}
-              selected={votedCandidateId === candidates[4].id}
-              hasVoted={!!voter?.has_voted}
-              onSelect={() => handleCardClick(candidates[4])}
-            />
-          </div>
-        )}
       </div>
 
       <footer className="bg-black/20 text-white/70 text-center py-2 text-xs">
