@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { CandidateCard } from "@/components/candidate-card";
 import { VoteConfirmDialog } from "@/components/vote-confirm-dialog";
 import { ConnectionBanner } from "@/components/connection-banner";
+import { CountdownTimer } from "@/components/countdown-timer";
 import { useRealtimeSubscription } from "@/lib/supabase/realtime";
 
 type Candidate = {
@@ -68,6 +69,10 @@ function VoteInner() {
   }, []);
 
   const refreshSnapshot = useCallback(() => {
+    fetchSnapshot();
+  }, [fetchSnapshot]);
+
+  const handleCountdownExpired = useCallback(() => {
     fetchSnapshot();
   }, [fetchSnapshot]);
 
@@ -154,6 +159,14 @@ function VoteInner() {
   return (
     <main className="min-h-screen flex flex-col">
       <ConnectionBanner connected={connected} />
+
+      {event?.end_at && (event?.status === "voting" || event?.status === "countdown") && (
+        <CountdownTimer
+          endAt={event.end_at}
+          status={event.status}
+          onExpired={handleCountdownExpired}
+        />
+      )}
 
       <header className="liquid-glass-header text-white py-4 px-4 text-center">
         <div className="fx-focus" role="img" aria-label={event?.name ?? "Sự kiện"}>

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRealtimeSubscription } from "@/lib/supabase/realtime";
+import { CountdownTimer } from "@/components/countdown-timer";
 
 type Candidate = {
   id: string;
@@ -140,6 +141,11 @@ export default function AdminPage() {
     setShowRevealModal(false);
   }
 
+  const handleAutoLock = useCallback(async () => {
+    if (event?.status !== "voting") return;
+    await callAdminApi("lock");
+  }, [event?.status]);
+
   function handleResetVotes() {
     if (resetConfirmation !== "RESET_VOTES") {
       setError('Cần nhập "RESET_VOTES" để xác nhận');
@@ -204,7 +210,15 @@ export default function AdminPage() {
               {statusLabels[event?.status ?? ""] ?? event?.status}
             </span>
           </div>
-          {event?.end_at && (
+          {event?.end_at && event?.status === "voting" && (
+            <CountdownTimer
+              endAt={event.end_at}
+              status={event.status}
+              variant="inline"
+              onExpired={handleAutoLock}
+            />
+          )}
+          {event?.end_at && event?.status !== "voting" && (
             <p className="text-sm text-on-surface-muted">
               Kết thúc: {new Date(event.end_at).toLocaleTimeString("vi-VN")}
             </p>
