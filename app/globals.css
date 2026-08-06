@@ -26,24 +26,23 @@ body {
   color: var(--color-on-surface);
 }
 
-/* Spotlight text effect */
+/* Spotlight text effect — gold gradient with moving sheen */
 .fx-spotlight {
   font: 600 26px/1.2 "JetBrains Mono", monospace;
   letter-spacing: .08em;
-  background: radial-gradient(3.5ch 100% at 50% 50%,
-      var(--ink) 20%,
-      color-mix(in srgb, var(--ink) 14%, transparent) 75%
-    ) 0 0 / 300% 100%;
+  background:
+    radial-gradient(3.5ch 100% at 50% 50%,
+      rgba(255,255,255,0.6) 0%,
+      rgba(255,255,255,0) 70%
+    ) 0 0 / 300% 100%,
+    linear-gradient(90deg, #fad68e, #fbe2a9, #fef4d0, #fae6af, #fada9b);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   animation: fx-spotlight 3.4s ease-in-out infinite alternate;
-  --ink: currentColor;
-  --ink-2: #FF4FD8;
-  --ink-3: #4FF8FF;
 }
 
 @keyframes fx-spotlight {
-  0%   { background-position: 100% 0; }
-  100% { background-position: 0% 0; }
+  0%   { background-position: 100% 0, 0 0; }
+  100% { background-position: 0% 0, 0 0; }
 }

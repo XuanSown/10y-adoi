@@ -40,7 +40,7 @@ export default function LoginPage() {
     <main className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
         <div className="text-center mb-8">
-          <div className="fx-spotlight text-primary-dark">SPOTLIGHT</div>
+          <div className="fx-spotlight text-primary-dark">LOGIN</div>
           <p className="text-on-surface-muted mt-2">A Decade Of Inspiration</p>
         </div>
 
