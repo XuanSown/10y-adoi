@@ -21,11 +21,27 @@ type EventData = {
 
 const POLL_INTERVAL = 15_000;
 
+function getBarColor(rank: number): string {
+  if (rank === 0) return "rank-bar-gold";
+  if (rank <= 2) return "rank-bar-blue";
+  return "rank-bar-gray";
+}
+
+function getXAxisTicks(max: number): number[] {
+  if (max <= 5) return Array.from({ length: max + 1 }, (_, i) => i);
+  const step = Math.ceil(max / 5);
+  const ticks: number[] = [];
+  for (let i = 0; i <= max; i += step) ticks.push(i);
+  if (ticks[ticks.length - 1] !== max) ticks.push(max);
+  return ticks;
+}
+
 export default function RankPage() {
   const [event, setEvent] = useState<EventData | null>(null);
   const [candidates, setCandidates] = useState<Candidate[]>([]);
   const [loading, setLoading] = useState(true);
   const [connected, setConnected] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   const fetchSnapshot = useCallback(async () => {
     try {
@@ -68,6 +84,11 @@ export default function RankPage() {
     return () => { active = false; clearInterval(interval); };
   }, []);
 
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 100);
+    return () => clearTimeout(t);
+  }, []);
+
   if (loading) {
     return (
       <main className="min-h-screen flex items-center justify-center">
@@ -76,9 +97,10 @@ export default function RankPage() {
     );
   }
 
-  const sorted = [...candidates].sort((a, b) => a.display_order - b.display_order);
+  const sorted = [...candidates].sort((a, b) => b.vote_count - a.vote_count);
   const maxVotes = Math.max(...sorted.map((c) => c.vote_count), 1);
   const totalVotes = sorted.reduce((sum, c) => sum + c.vote_count, 0);
+  const ticks = getXAxisTicks(maxVotes);
 
   return (
     <main className="min-h-screen flex flex-col">
@@ -93,32 +115,53 @@ export default function RankPage() {
         <p className="fx-subtitle text-white/70 text-sm mt-1">Bảng xếp hạng</p>
       </header>
 
-      <div className="flex-1 p-4">
-        <div className="max-w-2xl mx-auto space-y-3">
-          {sorted.map((c) => {
-            const pct = (c.vote_count / maxVotes) * 100;
-            return (
-              <div key={c.id} className="liquid-glass-card p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-primary/10 text-primary text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0">
-                      {c.display_order}
-                    </span>
-                    <span className="font-medium text-sm text-on-surface">{c.name}</span>
+      <div className="flex-1 p-4 pt-6">
+        <div className="max-w-2xl mx-auto">
+          {/* Chart area */}
+          <div className="space-y-4">
+            {sorted.map((c, idx) => {
+              const pct = maxVotes > 0 ? (c.vote_count / maxVotes) * 100 : 0;
+              return (
+                <div key={c.id} className="rank-row">
+                  {/* Label */}
+                  <div className="rank-label">
+                    <span className="rank-order">{idx + 1}</span>
+                    <span className="rank-name">{c.name}</span>
                   </div>
-                  <span className="font-bold text-primary text-sm shrink-0 ml-2">
-                    {c.vote_count} <span className="text-on-surface-muted font-normal text-xs">vote</span>
-                  </span>
+                  {/* Bar */}
+                  <div className="rank-bar-track">
+                    <div
+                      className={`rank-bar-fill ${getBarColor(idx)} ${mounted ? "rank-bar-animate" : ""}`}
+                      style={{ width: mounted ? `${pct}%` : "0%" }}
+                    />
+                    {/* Value on bar */}
+                    <span
+                      className={`rank-value ${mounted ? "rank-value-animate" : ""}`}
+                      style={{
+                        left: mounted ? `${Math.max(pct, 8)}%` : "0%",
+                        opacity: mounted ? 1 : 0,
+                      }}
+                    >
+                      {c.vote_count}
+                    </span>
+                  </div>
                 </div>
-                <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
-                  <div
-                    className="bg-primary h-full rounded-full transition-all duration-500 ease-out"
-                    style={{ width: `${pct}%` }}
-                  />
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
+          {/* X-axis */}
+          <div className="rank-xaxis">
+            <div className="rank-xaxis-line" />
+            <div className="rank-xaxis-ticks">
+              {ticks.map((t) => (
+                <span key={t} className="rank-xaxis-tick" style={{ left: `${(t / maxVotes) * 100}%` }}>
+                  {t}
+                </span>
+              ))}
+            </div>
+            <p className="text-center text-white/50 text-xs mt-1">Số vote</p>
+          </div>
         </div>
       </div>
 
