@@ -155,7 +155,11 @@ function VoteInner() {
       <ConnectionBanner connected={connected} />
 
       <header className="bg-primary-dark/90 text-white py-3 px-4 text-center">
-        <div className="fx-spotlight text-white">{event?.name ?? "Sự kiện"}</div>
+        <div className="fx-focus" role="img" aria-label={event?.name ?? "Sự kiện"}>
+          {(event?.name ?? "Sự kiện").split("").map((ch, i) => (
+            <b key={i} aria-hidden="true" style={{ "--i": i } as React.CSSProperties}>{ch}</b>
+          ))}
+        </div>
         {voter && !isDisplay && (
           <p className="text-sm opacity-80">Xin chào, {voter.display_name}</p>
         )}

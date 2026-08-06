@@ -46,3 +46,20 @@ body {
   0%   { background-position: 100% 0, 0 0; }
   100% { background-position: 0% 0, 0 0; }
 }
+
+/* Focus-Drift — letters slip in and out of focus, one after another */
+.fx-focus {
+  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: #fad68e;
+}
+.fx-focus b {
+  font-weight: inherit;
+  display: inline-block;
+  animation: fx-focus 2.6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * .18s);
+}
+@keyframes fx-focus {
+  0%, 100% { filter: blur(0);   opacity: 1; }
+  50%      { filter: blur(7px); opacity: .35; }
+}
