@@ -27,14 +27,8 @@ function getBarColor(rank: number): string {
   return "rank-bar-gray";
 }
 
-function getXAxisTicks(max: number): number[] {
-  if (max <= 5) return Array.from({ length: max + 1 }, (_, i) => i);
-  const step = Math.ceil(max / 5);
-  const ticks: number[] = [];
-  for (let i = 0; i <= max; i += step) ticks.push(i);
-  if (ticks[ticks.length - 1] !== max) ticks.push(max);
-  return ticks;
-}
+const XAXIS_TICKS = [0, 50, 100, 150, 200];
+const XAXIS_MAX = 200;
 
 export default function RankPage() {
   const [event, setEvent] = useState<EventData | null>(null);
@@ -98,9 +92,7 @@ export default function RankPage() {
   }
 
   const sorted = [...candidates].sort((a, b) => b.vote_count - a.vote_count);
-  const maxVotes = Math.max(...sorted.map((c) => c.vote_count), 1);
   const totalVotes = sorted.reduce((sum, c) => sum + c.vote_count, 0);
-  const ticks = getXAxisTicks(maxVotes);
 
   return (
     <main className="min-h-screen flex flex-col">
@@ -120,7 +112,7 @@ export default function RankPage() {
           {/* Chart area */}
           <div className="space-y-4">
             {sorted.map((c, idx) => {
-              const pct = maxVotes > 0 ? (c.vote_count / maxVotes) * 100 : 0;
+              const pct = (c.vote_count / XAXIS_MAX) * 100;
               return (
                 <div key={c.id} className="rank-row">
                   {/* Label */}
@@ -154,8 +146,8 @@ export default function RankPage() {
           <div className="rank-xaxis">
             <div className="rank-xaxis-line" />
             <div className="rank-xaxis-ticks">
-              {ticks.map((t) => (
-                <span key={t} className="rank-xaxis-tick" style={{ left: `${(t / maxVotes) * 100}%` }}>
+              {XAXIS_TICKS.map((t) => (
+                <span key={t} className="rank-xaxis-tick" style={{ left: `${(t / XAXIS_MAX) * 100}%` }}>
                   {t}
                 </span>
               ))}
