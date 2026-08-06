@@ -25,3 +25,25 @@ body {
   background-attachment: fixed;
   color: var(--color-on-surface);
 }
+
+/* Spotlight text effect */
+.fx-spotlight {
+  font: 600 26px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  background: radial-gradient(3.5ch 100% at 50% 50%,
+      var(--ink) 20%,
+      color-mix(in srgb, var(--ink) 14%, transparent) 75%
+    ) 0 0 / 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fx-spotlight 3.4s ease-in-out infinite alternate;
+  --ink: currentColor;
+  --ink-2: #FF4FD8;
+  --ink-3: #4FF8FF;
+}
+
+@keyframes fx-spotlight {
+  0%   { background-position: 100% 0; }
+  100% { background-position: 0% 0; }
+}

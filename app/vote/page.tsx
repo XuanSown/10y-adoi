@@ -155,7 +155,7 @@ function VoteInner() {
       <ConnectionBanner connected={connected} />
 
       <header className="bg-primary-dark/90 text-white py-3 px-4 text-center">
-        <h1 className="text-lg font-bold">{event?.name ?? "Sự kiện"}</h1>
+        <div className="fx-spotlight text-white">{event?.name ?? "Sự kiện"}</div>
         {voter && !isDisplay && (
           <p className="text-sm opacity-80">Xin chào, {voter.display_name}</p>
         )}
