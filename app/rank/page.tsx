@@ -107,10 +107,10 @@ export default function RankPage() {
         <p className="fx-subtitle text-white/70 text-sm mt-1">Bảng xếp hạng</p>
       </header>
 
-      <div className="flex-1 flex items-center justify-center p-4 sm:p-6">
-        <div className="w-full max-w-2xl">
+      <div className="flex-1 flex items-center justify-center px-4 sm:px-8 py-4">
+        <div className="w-full max-w-7xl">
           {/* Chart area */}
-          <div className="space-y-5 sm:space-y-6">
+          <div className="space-y-6 sm:space-y-8">
             {sorted.map((c, idx) => {
               const pct = (c.vote_count / XAXIS_MAX) * 100;
               return (
@@ -126,13 +126,10 @@ export default function RankPage() {
                       className={`rank-bar-fill ${getBarColor(idx)} ${mounted ? "rank-bar-animate" : ""}`}
                       style={{ width: mounted ? `${pct}%` : "0%" }}
                     />
-                    {/* Value on bar */}
+                    {/* Value at end of bar */}
                     <span
                       className={`rank-value ${mounted ? "rank-value-animate" : ""}`}
-                      style={{
-                        left: mounted ? `${Math.max(pct, 8)}%` : "0%",
-                        opacity: mounted ? 1 : 0,
-                      }}
+                      style={{ opacity: mounted ? 1 : 0 }}
                     >
                       {c.vote_count}
                     </span>

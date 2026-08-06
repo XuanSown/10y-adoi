@@ -185,17 +185,17 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  min-width: 140px;
+  width: 180px;
   flex-shrink: 0;
 }
 
 .rank-order {
-  font: 700 13px/1 "SVN-Gilroy", sans-serif;
+  font: 700 15px/1 "SVN-Gilroy", sans-serif;
   color: #fad68e;
   background: rgba(250, 214, 142, 0.12);
   border: 1px solid rgba(250, 214, 142, 0.3);
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -204,7 +204,7 @@ body {
 }
 
 .rank-name {
-  font: 700 16px/1.2 "SVN-Gilroy", sans-serif;
+  font: 700 20px/1.2 "SVN-Gilroy", sans-serif;
   color: #f8fafc;
   white-space: nowrap;
   overflow: hidden;
@@ -213,7 +213,7 @@ body {
 
 .rank-bar-track {
   flex: 1;
-  height: 36px;
+  height: 48px;
   background: rgba(255, 255, 255, 0.06);
   border-radius: 8px;
   position: relative;
@@ -249,14 +249,15 @@ body {
 
 .rank-value {
   position: absolute;
+  right: 8px;
   top: 50%;
-  transform: translate(-50%, -50%);
-  font: 700 14px/1 "SVN-Gilroy", sans-serif;
+  transform: translateY(-50%);
+  font: 700 16px/1 "SVN-Gilroy", sans-serif;
   color: #fff;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   pointer-events: none;
   white-space: nowrap;
-  transition: left 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+  transition: opacity 0.4s ease;
 }
 
 .rank-value-animate {
@@ -268,13 +269,13 @@ body {
   position: relative;
   margin-top: 20px;
   height: 40px;
-  padding-left: 162px; /* match label width + gap */
+  padding-left: 196px; /* match label width(180) + gap(12) + row padding(4) */
 }
 
 .rank-xaxis-line {
   position: absolute;
   top: 0;
-  left: 162px;
+  left: 196px;
   right: 4px;
   height: 1px;
   background: rgba(255, 255, 255, 0.2);
@@ -288,7 +289,7 @@ body {
 .rank-xaxis-tick {
   position: absolute;
   transform: translateX(-50%);
-  font: 600 13px/1 "SVN-Gilroy", sans-serif;
+  font: 600 15px/1 "SVN-Gilroy", sans-serif;
   color: rgba(255, 255, 255, 0.55);
   white-space: nowrap;
 }
@@ -296,21 +297,21 @@ body {
 /* Responsive */
 @media (max-width: 640px) {
   .rank-label {
-    min-width: 110px;
+    width: 130px;
   }
   .rank-name {
-    font-size: 13px;
+    font-size: 14px;
   }
   .rank-bar-track {
-    height: 28px;
+    height: 32px;
   }
   .rank-value {
-    font-size: 11px;
+    font-size: 12px;
   }
   .rank-xaxis {
-    padding-left: 122px;
+    padding-left: 146px;
   }
   .rank-xaxis-line {
-    left: 122px;
+    left: 146px;
   }
 }
