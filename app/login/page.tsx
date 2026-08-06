@@ -41,7 +41,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
         <div className="text-center mb-8">
           <div className="fx-spotlight text-primary-dark">LOGIN</div>
-          <p className="text-on-surface-muted mt-2">A Decade Of Inspiration</p>
+          <p className="fx-subtitle text-on-surface-muted mt-2">A Decade Of Inspiration</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">

@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "SVN-Gilroy";
+  src: url("/font/SVN-Gilroy Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-primary: #1e40af;
   --color-primary-light: #3b82f6;
@@ -28,7 +36,7 @@ body {
 
 /* Spotlight text effect — gold gradient with moving sheen */
 .fx-spotlight {
-  font: 600 26px/1.2 "JetBrains Mono", monospace;
+  font: 700 26px/1.2 "SVN-Gilroy", sans-serif;
   letter-spacing: .08em;
   background:
     radial-gradient(3.5ch 100% at 50% 50%,
@@ -49,7 +57,7 @@ body {
 
 /* Focus-Drift — letters slip in and out of focus, one after another */
 .fx-focus {
-  font: 600 30px/1.1 "JetBrains Mono", monospace;
+  font: 700 30px/1.1 "SVN-Gilroy", sans-serif;
   letter-spacing: .08em;
   color: #fad68e;
 }
@@ -62,4 +70,11 @@ body {
 @keyframes fx-focus {
   0%, 100% { filter: blur(0);   opacity: 1; }
   50%      { filter: blur(7px); opacity: .35; }
+}
+
+/* Subtitle uses SVN-Gilroy */
+.fx-subtitle {
+  font-family: "SVN-Gilroy", sans-serif;
+  font-weight: 700;
+  letter-spacing: .05em;
 }
