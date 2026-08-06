@@ -57,18 +57,15 @@ body {
 
 /* Focus-Drift — letters slip in and out of focus, one after another */
 .fx-focus {
-  font: 700 clamp(20px, 4vw, 30px)/1.1 "SVN-Gilroy", sans-serif;
+  font: 700 30px/1.1 "SVN-Gilroy", sans-serif;
   letter-spacing: .08em;
   color: #fad68e;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .fx-focus b {
   font-weight: inherit;
   display: inline-block;
   animation: fx-focus 2.6s ease-in-out infinite;
-  animation-delay: calc(var(--i) * .18s);
+  animation-delay: calc(var(--i) * .05s);
 }
 @keyframes fx-focus {
   0%, 100% { filter: blur(0);   opacity: 1; }
@@ -98,7 +95,6 @@ body {
     inset 0 -1px 0 rgba(255, 255, 255, 0.05),
     0 4px 24px rgba(0, 0, 0, 0.12);
   position: relative;
-  overflow: hidden;
 }
 
 /* Subtle specular highlight across the top */
