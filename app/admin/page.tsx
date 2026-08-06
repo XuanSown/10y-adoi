@@ -162,8 +162,8 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-surface-dim">
-        <p className="text-on-surface">Đang tải...</p>
+      <main className="min-h-screen flex items-center justify-center">
+        <p className="text-white">Đang tải...</p>
       </main>
     );
   }
@@ -177,10 +177,10 @@ export default function AdminPage() {
   };
 
   return (
-    <main className="min-h-screen bg-surface-dim p-4">
+    <main className="min-h-screen p-4">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold text-on-surface mb-1">Admin Dashboard</h1>
-        <p className="text-on-surface-muted text-sm mb-4">{event?.name}</p>
+        <h1 className="text-2xl font-bold text-white mb-1">Admin Dashboard</h1>
+        <p className="text-white/70 text-sm mb-4">{event?.name}</p>
 
         {error && (
           <div className="bg-danger/10 border border-danger text-danger px-4 py-2 rounded-lg mb-4 text-sm">
@@ -197,7 +197,7 @@ export default function AdminPage() {
         </div>
 
         {/* Status */}
-        <div className="bg-white rounded-xl shadow p-4 mb-6">
+        <div className="liquid-glass-card p-4 mb-6">
           <div className="flex items-center justify-between mb-2">
             <span className="font-medium">Trạng thái:</span>
             <span className="px-3 py-1 rounded-full text-sm font-semibold bg-primary/10 text-primary">
@@ -212,7 +212,7 @@ export default function AdminPage() {
         </div>
 
         {/* Controls */}
-        <div className="bg-white rounded-xl shadow p-4 mb-6">
+        <div className="liquid-glass-card p-4 mb-6">
           <h2 className="font-bold mb-3">Điều khiển</h2>
           <div className="flex flex-wrap gap-2">
             {event?.status === "draft" && (
@@ -244,11 +244,11 @@ export default function AdminPage() {
         </div>
 
         {/* Candidates */}
-        <div className="bg-white rounded-xl shadow p-4 mb-6">
+        <div className="liquid-glass-card p-4 mb-6">
           <h2 className="font-bold mb-3">Kết quả vote</h2>
           <div className="space-y-2">
             {candidates.map((c) => (
-              <div key={c.id} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
+              <div key={c.id} className="flex items-center justify-between py-2 border-b border-white/10 last:border-0">
                 <div className="flex items-center gap-2">
                   <span className="bg-primary/10 text-primary text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
                     {c.display_order}
@@ -262,11 +262,11 @@ export default function AdminPage() {
         </div>
 
         {/* Voters */}
-        <div className="bg-white rounded-xl shadow p-4 mb-6">
+        <div className="liquid-glass-card p-4 mb-6">
           <h2 className="font-bold mb-3">Danh sách người tham gia ({voters.length})</h2>
           <div className="max-h-64 overflow-y-auto">
             <table className="w-full text-sm">
-              <thead className="text-left text-on-surface-muted border-b">
+              <thead className="text-left text-white/60 border-b border-white/15">
                 <tr>
                   <th className="py-2">Tên</th>
                   <th className="py-2 text-center">Trạng thái</th>
@@ -274,13 +274,13 @@ export default function AdminPage() {
               </thead>
               <tbody>
                 {voters.map((v, i) => (
-                  <tr key={i} className="border-b border-gray-50 last:border-0">
+                  <tr key={i} className="border-b border-white/5 last:border-0">
                     <td className="py-1.5">{v.display_name}</td>
                     <td className="py-1.5 text-center">
                       {v.has_voted ? (
                         <span className="text-success text-xs font-medium">✓ Đã vote</span>
                       ) : (
-                        <span className="text-on-surface-muted text-xs">Chưa vote</span>
+                        <span className="text-white/50 text-xs">Chưa vote</span>
                       )}
                     </td>
                   </tr>
@@ -291,7 +291,7 @@ export default function AdminPage() {
         </div>
 
         {/* Reset */}
-        <div className="bg-white rounded-xl shadow p-4">
+        <div className="liquid-glass-card p-4">
           <h2 className="font-bold mb-3 text-danger">Nguy hiểm</h2>
           <div className="flex flex-wrap gap-2">
             <Btn onClick={() => setShowResetVotesModal(true)} variant="danger" small>
@@ -315,7 +315,7 @@ export default function AdminPage() {
               max={120}
               value={startMinutes}
               onChange={(e) => setStartMinutes(Number(e.target.value))}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2"
+              className="w-full border border-white/30 bg-white/10 text-white rounded-lg px-3 py-2"
             />
           </div>
           <Btn onClick={handleStart} loading={actionLoading === "start"}>Bắt đầu</Btn>
@@ -324,21 +324,21 @@ export default function AdminPage() {
 
       {showLockModal && (
         <Modal title="Khóa vote" onClose={() => setShowLockModal(false)}>
-          <p className="mb-4 text-sm text-on-surface-muted">Xác nhận khóa vote? Người dùng sẽ không thể vote tiếp.</p>
+          <p className="mb-4 text-sm text-white/70">Xác nhận khóa vote? Người dùng sẽ không thể vote tiếp.</p>
           <Btn onClick={handleLock} variant="danger" loading={actionLoading === "lock"}>Xác nhận khóa</Btn>
         </Modal>
       )}
 
       {showReopenModal && (
         <Modal title="Mở lại vote" onClose={() => setShowReopenModal(false)}>
-          <p className="mb-4 text-sm text-on-surface-muted">Mở lại vote?</p>
+          <p className="mb-4 text-sm text-white/70">Mở lại vote?</p>
           <Btn onClick={handleReopen} loading={actionLoading === "reopen"}>Xác nhận mở lại</Btn>
         </Modal>
       )}
 
       {showRevealModal && (
         <Modal title="Công bố kết quả" onClose={() => setShowRevealModal(false)}>
-          <p className="mb-4 text-sm text-on-surface-muted">Công bố kết quả? Hành động này không thể hoàn tác.</p>
+          <p className="mb-4 text-sm text-white/70">Công bố kết quả? Hành động này không thể hoàn tác.</p>
           <Btn onClick={handleReveal} variant="success" loading={actionLoading === "reveal"}>Xác nhận công bố</Btn>
         </Modal>
       )}
@@ -346,12 +346,12 @@ export default function AdminPage() {
       {showResetVotesModal && (
         <Modal title="Reset votes" onClose={() => { setShowResetVotesModal(false); setResetConfirmation(""); }}>
           <p className="mb-2 text-sm text-danger">Tất cả votes và trạng thái đã vote sẽ bị xóa.</p>
-          <p className="mb-4 text-sm text-on-surface-muted">Nhập <code className="bg-gray-100 px-1 rounded">RESET_VOTES</code> để xác nhận:</p>
+          <p className="mb-4 text-sm text-white/70">Nhập <code className="bg-white/10 px-1 rounded">RESET_VOTES</code> để xác nhận:</p>
           <input
             type="text"
             value={resetConfirmation}
             onChange={(e) => setResetConfirmation(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-4"
+            className="w-full border border-white/30 bg-white/10 text-white rounded-lg px-3 py-2 mb-4"
             placeholder="RESET_VOTES"
           />
           <Btn onClick={handleResetVotes} variant="danger" loading={actionLoading === "reset-votes"}>Xác nhận reset</Btn>
@@ -361,12 +361,12 @@ export default function AdminPage() {
       {showResetEventModal && (
         <Modal title="Reset toàn bộ" onClose={() => { setShowResetEventModal(false); setResetConfirmation(""); }}>
           <p className="mb-2 text-danger font-medium">XÓA TOÀN BỘ DỮ LIỆU!</p>
-          <p className="mb-4 text-sm text-on-surface-muted">Nhập <code className="bg-gray-100 px-1 rounded">RESET_EVENT</code> để xác nhận:</p>
+          <p className="mb-4 text-sm text-white/70">Nhập <code className="bg-white/10 px-1 rounded">RESET_EVENT</code> để xác nhận:</p>
           <input
             type="text"
             value={resetConfirmation}
             onChange={(e) => setResetConfirmation(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-4"
+            className="w-full border border-white/30 bg-white/10 text-white rounded-lg px-3 py-2 mb-4"
             placeholder="RESET_EVENT"
           />
           <Btn onClick={handleResetEvent} variant="danger" loading={actionLoading === "reset-event"}>Xác nhận reset</Btn>
@@ -378,9 +378,9 @@ export default function AdminPage() {
 
 function StatCard({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="bg-white rounded-xl shadow p-3 text-center">
+    <div className="liquid-glass-card p-3 text-center">
       <p className="text-2xl font-bold text-primary">{value}</p>
-      <p className="text-xs text-on-surface-muted mt-1">{label}</p>
+      <p className="text-xs text-white/70 mt-1">{label}</p>
     </div>
   );
 }
@@ -418,12 +418,12 @@ function Btn({
 function Modal({ title, children, onClose }: { title: string; children: React.ReactNode; onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-2xl">
+      <div className="liquid-glass-card rounded-2xl p-6 w-full max-w-sm shadow-2xl">
         <h2 className="text-lg font-bold mb-4">{title}</h2>
         {children}
         <button
           onClick={onClose}
-          className="mt-4 w-full py-2 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 transition"
+          className="mt-4 w-full py-2 border border-white/30 rounded-lg text-sm font-medium hover:bg-white/10 transition"
         >
           Đóng
         </button>

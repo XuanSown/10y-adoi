@@ -38,15 +38,15 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
+      <div className="w-full max-w-md liquid-glass-card rounded-2xl shadow-2xl p-8">
         <div className="text-center mb-8">
           <div className="fx-spotlight text-primary-dark">LOGIN</div>
-          <p className="fx-subtitle text-on-surface-muted mt-2">A Decade Of Inspiration</p>
+          <p className="fx-subtitle text-white/80 mt-2">A Decade Of Inspiration</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-on-surface mb-1">
+            <label htmlFor="name" className="block text-sm font-medium text-white mb-1">
               Nhập tên của bạn
             </label>
             <input
@@ -58,7 +58,7 @@ export default function LoginPage() {
               minLength={2}
               maxLength={50}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
+              className="w-full px-4 py-3 border border-white/30 bg-white/10 text-white placeholder-white/50 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
             />
           </div>
 
