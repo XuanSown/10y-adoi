@@ -124,7 +124,7 @@ export default function RankPage() {
         <p className="fx-subtitle text-white/70 text-sm mt-1">Bảng xếp hạng</p>
       </header>
 
-      <div className="flex-1 flex items-center justify-center px-4 sm:px-8 py-4">
+      <div className="flex-1 flex items-center justify-center px-2 sm:px-8 py-4">
         <div className="w-full max-w-7xl">
           {/* Chart area */}
           <div className="space-y-6 sm:space-y-8">

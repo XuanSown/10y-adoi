@@ -185,7 +185,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 180px;
+  width: 230px;
   flex-shrink: 0;
 }
 
@@ -207,8 +207,6 @@ body {
   font: 700 20px/1.2 "SVN-Gilroy", sans-serif;
   color: #f8fafc;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .rank-bar-track {
@@ -269,13 +267,13 @@ body {
   position: relative;
   margin-top: 20px;
   height: 40px;
-  padding-left: 196px; /* match label width(180) + gap(12) + row padding(4) */
+  padding-left: 246px; /* match label width(230) + gap(12) + row padding(4) */
 }
 
 .rank-xaxis-line {
   position: absolute;
   top: 0;
-  left: 196px;
+  left: 246px;
   right: 4px;
   height: 1px;
   background: rgba(255, 255, 255, 0.2);
@@ -427,11 +425,21 @@ body {
     font-size: 15px;
     padding: 5px 10px;
   }
+  .rank-row {
+    gap: 6px;
+    padding: 0;
+  }
   .rank-label {
-    width: 130px;
+    width: 210px;
+    gap: 6px;
+  }
+  .rank-order {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
   }
   .rank-name {
-    font-size: 14px;
+    font-size: 13.5px;
   }
   .rank-bar-track {
     height: 32px;
@@ -440,10 +448,10 @@ body {
     font-size: 12px;
   }
   .rank-xaxis {
-    padding-left: 146px;
+    padding-left: 216px;
   }
   .rank-xaxis-line {
-    left: 146px;
+    left: 216px;
   }
   .sponsor-banner-inner {
     gap: 16px;
