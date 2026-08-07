@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef } from "react";
+
 interface VoteConfirmDialogProps {
   candidateName: string;
   open: boolean;
@@ -15,7 +17,21 @@ export function VoteConfirmDialog({
   onConfirm,
   onCancel,
 }: VoteConfirmDialogProps) {
-  if (!open) return null;
+  const submittedRef = useRef(false);
+
+  if (!open) {
+    // Reset guard when dialog closes
+    submittedRef.current = false;
+    return null;
+  }
+
+  const isDisabled = loading || submittedRef.current;
+
+  function handleConfirmClick() {
+    if (submittedRef.current) return;
+    submittedRef.current = true;
+    onConfirm();
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
@@ -29,14 +45,14 @@ export function VoteConfirmDialog({
         <div className="flex gap-3">
           <button
             onClick={onCancel}
-            disabled={loading}
+            disabled={isDisabled}
             className="flex-1 py-2.5 border border-gray-300 rounded-lg font-medium text-on-surface hover:bg-gray-50 transition disabled:opacity-50"
           >
             Hủy
           </button>
           <button
-            onClick={onConfirm}
-            disabled={loading}
+            onClick={handleConfirmClick}
+            disabled={isDisabled}
             className="flex-1 py-2.5 bg-primary text-white rounded-lg font-medium hover:bg-primary-dark transition disabled:opacity-50"
           >
             {loading ? "Đang gửi..." : "Xác nhận"}

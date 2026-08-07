@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { CandidateCard } from "@/components/candidate-card";
 import { VoteConfirmDialog } from "@/components/vote-confirm-dialog";
 import { ConnectionBanner } from "@/components/connection-banner";
@@ -56,8 +56,10 @@ function VoteInner() {
         setEvent(json.data.event);
         setCandidates(json.data.candidates ?? []);
         setVoter(json.data.voter ?? null);
-        if (json.data.voter?.has_voted) {
-          setVotedCandidateId(json.data.voter.id);
+        if (json.data.voter?.has_voted && json.data.voter?.voted_candidate_id) {
+          setVotedCandidateId(json.data.voter.voted_candidate_id);
+        } else if (!json.data.voter?.has_voted) {
+          setVotedCandidateId(null);
         }
       }
       setConnected(true);
@@ -78,6 +80,7 @@ function VoteInner() {
 
   useRealtimeSubscription("candidates-ch", "candidates", refreshSnapshot);
   useRealtimeSubscription("events-ch", "events", refreshSnapshot);
+  useRealtimeSubscription("voters-ch", "voters", refreshSnapshot);
 
   useEffect(() => {
     let active = true;
@@ -89,8 +92,10 @@ function VoteInner() {
         setEvent(json.data.event);
         setCandidates(json.data.candidates ?? []);
         setVoter(json.data.voter ?? null);
-        if (json.data.voter?.has_voted) {
-          setVotedCandidateId(json.data.voter.id);
+        if (json.data.voter?.has_voted && json.data.voter?.voted_candidate_id) {
+          setVotedCandidateId(json.data.voter.voted_candidate_id);
+        } else if (!json.data.voter?.has_voted) {
+          setVotedCandidateId(null);
         }
       }
       setConnected(true);
@@ -149,6 +154,15 @@ function VoteInner() {
     return (
       <main className="min-h-screen flex items-center justify-center">
         <p className="text-white text-lg">Đang tải...</p>
+      </main>
+    );
+  }
+
+  if (!isDisplay && !voter) {
+    return (
+      <main className="min-h-screen flex flex-col items-center justify-center gap-4">
+        <p className="text-white text-lg">Phiên đăng nhập đã hết hạn</p>
+        <a href="/login" className="px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary-dark transition">Đăng nhập lại</a>
       </main>
     );
   }
