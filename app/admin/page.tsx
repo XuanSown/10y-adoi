@@ -132,7 +132,7 @@ export default function AdminPage() {
   }
 
   function handleReopen() {
-    callAdminApi("reopen");
+    callAdminApi("reopen", { durationMinutes: startMinutes });
     setShowReopenModal(false);
   }
 
@@ -345,7 +345,17 @@ export default function AdminPage() {
 
       {showReopenModal && (
         <Modal title="Mở lại vote" onClose={() => setShowReopenModal(false)}>
-          <p className="mb-4 text-sm text-white/70">Mở lại vote?</p>
+          <div className="mb-4">
+            <label className="block text-sm font-medium mb-1">Thời gian (phút)</label>
+            <input
+              type="number"
+              min={1}
+              max={120}
+              value={startMinutes}
+              onChange={(e) => setStartMinutes(Number(e.target.value))}
+              className="w-full border border-white/30 bg-white/10 text-white rounded-lg px-3 py-2"
+            />
+          </div>
           <Btn onClick={handleReopen} loading={actionLoading === "reopen"}>Xác nhận mở lại</Btn>
         </Modal>
       )}
