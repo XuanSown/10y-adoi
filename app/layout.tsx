@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "10th Anniversary - A Decade Of Inspiration",
+  title: "A Decade Of Inspiration",
   description: "Website bình chọn realtime",
 };
 

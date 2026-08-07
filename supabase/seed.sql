@@ -1,6 +1,6 @@
 -- Seed: one event + 5 candidates
 INSERT INTO events (name, status, version)
-VALUES ('10th Anniversary - A Decade Of Inspiration', 'draft', 1);
+VALUES ('A Decade Of Inspiration', 'draft', 1);
 
 INSERT INTO candidates (event_id, name, image_path, display_order)
 SELECT
