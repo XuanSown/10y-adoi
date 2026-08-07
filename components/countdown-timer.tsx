@@ -63,7 +63,7 @@ export function CountdownTimer({
   // Don't render if no end time or not in an active state
   if (!endAt) return null;
 
-  const isUrgent = remaining <= 60 && remaining > 0;
+  const isUrgent = remaining <= 15 && remaining > 0;
   const isDone = remaining <= 0 || !isActive;
 
   if (variant === "inline") {

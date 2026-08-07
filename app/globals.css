@@ -330,7 +330,7 @@ body {
   white-space: nowrap;
 }
 
-/* Urgent — under 60 seconds */
+/* Urgent — under 15 seconds */
 .countdown-badge-urgent {
   background: linear-gradient(
     135deg,
