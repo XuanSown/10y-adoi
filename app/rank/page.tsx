@@ -118,10 +118,10 @@ export default function RankPage() {
       <header className="liquid-glass-header text-white py-4 px-4 text-center">
         <div className="fx-focus" role="img" aria-label={event?.name ?? "Sự kiện"}>
           {(event?.name ?? "Sự kiện").split("").map((ch, i) => (
-            <b key={i} aria-hidden="true" style={{ "--i": i } as React.CSSProperties}>{ch}</b>
+            <b key={i} aria-hidden="true" style={{ "--i": i } as React.CSSProperties}>{ch === " " ? "\u00A0" : ch}</b>
           ))}
         </div>
-        <p className="fx-subtitle text-white/70 text-sm mt-1">Bảng xếp hạng</p>
+        <p className="fx-subtitle text-white/90 text-base sm:text-xl mt-1.5">Bình chọn bài video truyền cảm hứng nhất</p>
       </header>
 
       <div className="flex-1 flex items-center justify-center px-2 sm:px-8 py-4">

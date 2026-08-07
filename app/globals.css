@@ -64,6 +64,7 @@ body {
 .fx-focus b {
   font-weight: inherit;
   display: inline-block;
+  white-space: pre;
   animation: fx-focus 2.6s ease-in-out infinite;
   animation-delay: calc(var(--i) * .05s);
 }

@@ -171,7 +171,7 @@ function VoteInner() {
       <header className="liquid-glass-header text-white py-4 px-4 text-center">
         <div className="fx-focus" role="img" aria-label={event?.name ?? "Sự kiện"}>
           {(event?.name ?? "Sự kiện").split("").map((ch, i) => (
-            <b key={i} aria-hidden="true" style={{ "--i": i } as React.CSSProperties}>{ch}</b>
+            <b key={i} aria-hidden="true" style={{ "--i": i } as React.CSSProperties}>{ch === " " ? "\u00A0" : ch}</b>
           ))}
         </div>
         {voter && !isDisplay && (
