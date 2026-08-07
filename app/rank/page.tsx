@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { ConnectionBanner } from "@/components/connection-banner";
 import { CountdownTimer } from "@/components/countdown-timer";
+import { SponsorBanner } from "@/components/sponsor-banner";
 import { useRealtimeSubscription } from "@/lib/supabase/realtime";
 
 type Candidate = {
@@ -110,6 +111,9 @@ export default function RankPage() {
           onExpired={handleCountdownExpired}
         />
       )}
+
+      {/* Sponsor logos banner — before header */}
+      <SponsorBanner />
 
       <header className="liquid-glass-header text-white py-4 px-4 text-center">
         <div className="fx-focus" role="img" aria-label={event?.name ?? "Sự kiện"}>
