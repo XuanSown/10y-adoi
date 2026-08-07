@@ -24,8 +24,9 @@ export async function POST(req: NextRequest) {
 
   const { error } = await supabaseAdmin.rpc("admin_reset_votes");
   if (error) {
+    console.error("admin_reset_votes error:", error);
     return NextResponse.json(
-      { ok: false, code: ERROR_CODES.INTERNAL_ERROR, message: "Không thể reset votes" },
+      { ok: false, code: ERROR_CODES.INTERNAL_ERROR, message: `Không thể reset votes: ${error.message}` },
       { status: 500 }
     );
   }

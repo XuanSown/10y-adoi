@@ -24,8 +24,9 @@ export async function POST(req: NextRequest) {
 
   const { error } = await supabaseAdmin.rpc("admin_reset_event");
   if (error) {
+    console.error("admin_reset_event error:", error);
     return NextResponse.json(
-      { ok: false, code: ERROR_CODES.INTERNAL_ERROR, message: "Không thể reset sự kiện" },
+      { ok: false, code: ERROR_CODES.INTERNAL_ERROR, message: `Không thể reset sự kiện: ${error.message}` },
       { status: 500 }
     );
   }
