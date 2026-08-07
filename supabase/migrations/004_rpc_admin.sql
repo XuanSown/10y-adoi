@@ -156,7 +156,7 @@ BEGIN
 
   DELETE FROM votes WHERE event_id = v_event_id;
   UPDATE candidates SET vote_count = 0 WHERE event_id = v_event_id;
-  UPDATE voters SET has_voted = false, voted_at = NULL;
+  UPDATE voters SET has_voted = false, voted_at = NULL WHERE id IS NOT NULL;
   UPDATE events SET status = 'draft', updated_at = now() WHERE id = v_event_id;
 
   INSERT INTO admin_audit_logs (action, metadata) VALUES ('reset_votes', '{}'::jsonb);

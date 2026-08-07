@@ -27,7 +27,7 @@ SELECT
   generate_series(1, 5);
 
 -- Step 3: Reset voters state so everyone can vote again
-UPDATE voters SET has_voted = false, voted_at = NULL;
+UPDATE voters SET has_voted = false, voted_at = NULL WHERE id IS NOT NULL;
 
 -- Step 4: Reset event to draft
 UPDATE events SET status = 'draft', updated_at = now()
